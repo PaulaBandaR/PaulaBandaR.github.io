@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Integrales</title>
+</head>
+<body>
+    <h1>Calculadora de Integrales</h1>
+    <form id="integralForm" onsubmit="return resolverIntegral()">
+        <label for="integralInput">Ingrese la integral que desea resolver:</label>
+        <input type="text" id="integralInput" name="integralInput" required>
+        <button type="submit">Resolver</button>
+    </form>
+    <div id="resultado"></div>
+
+    <script>
+        function resolverIntegral() {
+            const integralInput = document.getElementById('integralInput').value;
+            const url = `https://www.wolframalpha.com/input/?i=integrate+${encodeURIComponent(integralInput)}`;
+            window.open(url, '_blank');
+
+            // Reiniciar el formulario después de abrir Wolfram Alpha
+            setTimeout(() => {
+                document.getElementById('integralForm').reset();
+                document.getElementById('resultado').innerText = '';
+            }, 1000); // Esperar 1 segundo antes de reiniciar
+
+            return false; // Evitar el envío del formulario
+        }
+    </script>
+</body>
+</html>
